@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+## USE THIS IF YOU'D RATHER DO AUTOMATED INSTALLATION ##
+echo "THIS WILL INSTALL DATABASE SETUP SCRIPT FOR 
+Make sure you have the following installed beforehand.
+-DOCKER
+-Your multidev pulled and checked out"
+
+echo -n "Install Raynes script for database import automation?[Y/N]"
+read -r "install"
+echo -n "Does your Mac have the directory /usr/local/bin/?"
+read -r "directory"
+if [ $directory == n ] || [$directory == no ]; then
+	sudo mkdir -P /usr/local/bin
+fi
+if [ $install == y ] || [ $install == yes ]; then
+	rm /usr/local/bin/dbsetup
+	mkdir -p ~/raynescripts && cd ~/raynescripts
+curl -L https://raw.githubusercontent.com/RCNjcu/db-setup/main/dbsetup --output dbsetup
+chmod +x dbsetup
+sudo ln -s ~/raynescripts/dbsetup /usr/local/bin/dbsetup
+else
+	exit
+fi
